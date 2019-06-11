@@ -1,12 +1,8 @@
 const request = require('supertest');
-const expect = require('chai').expect;
-const mongoose = require('mongoose');
 
 const app = require('../../server');
 const User = require('../../models/user');
 const testDb = require('../testDb');
-
-mongoose.Promise = global.Promise;
 
 describe('Users', () => {
   before(() => {
@@ -36,9 +32,12 @@ describe('Users', () => {
         password: 'mypass123'
       })
       .expect('Content-Type', /json/)
-      .expect(200)
+      .expect(200, {
+        status: 'success',
+        data: {}
+      })
       .end((err, res) => {
-        expect(res.body.status).to.equal('success');
+        if (err) throw err;
       });
   });
 });

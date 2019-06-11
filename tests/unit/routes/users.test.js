@@ -15,14 +15,14 @@ describe('Users routes', () => {
       data: {}
     };
     const res = {
-      sendCalledWith: '',
-      send: function (data) {
-        this.sendCalledWith = data;
+      jsonCalledWith: '',
+      json: function (data) {
+        this.jsonCalledWith = data;
       }
     };
 
     usersRoutes.signin(req, res);
 
-    expect(res.sendCalledWith).to.deep.equal(expectedRes);
+    expect(res.jsonCalledWith).to.deep.equal(expectedRes);
   });
 });

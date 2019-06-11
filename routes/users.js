@@ -1,5 +1,5 @@
 function signin(req, res) {
-  res.send({
+  res.json({
     status: 'success',
     data: {}
   });
