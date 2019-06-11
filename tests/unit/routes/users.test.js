@@ -14,13 +14,13 @@ describe('Users routes', () => {
       status: 'success',
       data: {}
     };
-
     const res = {
       sendCalledWith: '',
       send: function (data) {
         this.sendCalledWith = data;
       }
     };
+
     usersRoutes.signin(req, res);
 
     expect(res.sendCalledWith).to.deep.equal(expectedRes);

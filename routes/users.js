@@ -1,6 +1,7 @@
 function signin(req, res) {
   res.send({
-
+    status: 'success',
+    data: {}
   });
 }
 
