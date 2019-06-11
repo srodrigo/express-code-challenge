@@ -34,7 +34,9 @@ describe('Authenticate User', () => {
     await User
       .create({
         email: 'validuser@testinstitution.com',
-        password: 'd2bf02e60ed38af96751c5a78a8ffbe32f4598f9'
+        password: 'd2bf02e60ed38af96751c5a78a8ffbe32f4598f9',
+        name: 'username',
+        role: 'student'
       });
 
     authenticateUser(username, password, authDone);

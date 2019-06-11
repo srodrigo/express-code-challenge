@@ -31,9 +31,12 @@ passport.deserializeUser(function(user, done) {
 });
 
 app.get('/', index);
+
 app.post('/users/signin',
   passport.authenticate('local'),
   usersRoutes.signin
 );
+
+app.post('/users/create', usersRoutes.create);
 
 module.exports = app;

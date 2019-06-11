@@ -11,6 +11,15 @@ const User = mongoose.model(
     password: {
       type: String,
       required: [true, 'Password is required.']
+    },
+    name: {
+      type: String,
+      required: [true, 'Name is required.']
+    },
+    // TODO: check valid role
+    role: {
+      type: String,
+      required: [true, 'Role is required.']
     }
   })
 );

@@ -5,6 +5,14 @@ function signin(req, res) {
   });
 }
 
+function create(req, res) {
+  res.json({
+    status: 'success',
+    data: {}
+  });
+}
+
 module.exports = {
-  signin: signin
+  signin: signin,
+  create: create
 };
