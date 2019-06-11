@@ -21,7 +21,7 @@ describe('Users', () => {
     await testDb.cleanUsers();
   });
 
-  it('authenticates an existing user', async done => {
+  it('authenticates an existing user', async () => {
     await User
       .create({
         email: 'validuser@testinstitution.com',
@@ -38,8 +38,7 @@ describe('Users', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .end((err, res) => {
-        expect(res.body.status).to.equal(200);
-        done();
+        expect(res.body.status).to.equal('success');
       });
   });
 });
