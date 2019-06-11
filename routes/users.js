@@ -1,5 +1,7 @@
-function signin(req, res, next) {
-  res.end(`Express Code Challenge Started`);
+function signin(req, res) {
+  res.send({
+
+  });
 }
 
 module.exports = {
