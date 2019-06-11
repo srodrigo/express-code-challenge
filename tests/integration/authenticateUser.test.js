@@ -10,11 +10,11 @@ describe('Authenticate User', () => {
   });
 
   after(async () => {
-    testDb.disconnect();
+    await testDb.disconnect();
   });
 
   beforeEach(async () => {
-    await User.deleteMany({})
+    await testDb.cleanUsers();
   });
 
   it('authenticates user with correct password', async () => {

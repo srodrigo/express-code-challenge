@@ -14,11 +14,11 @@ describe('Users', () => {
   });
 
   after(async () => {
-    testDb.disconnect();
+    await testDb.disconnect();
   });
 
   beforeEach(async () => {
-    await User.deleteMany({})
+    await testDb.cleanUsers();
   });
 
   it('authenticates an existing user', async done => {

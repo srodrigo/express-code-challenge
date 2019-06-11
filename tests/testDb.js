@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const User = require('../models/user');
+
 mongoose.Promise = global.Promise;
 
 function connect() {
@@ -16,7 +18,12 @@ async function disconnect() {
   mongoose.disconnect();
 }
 
+async function cleanUsers() {
+  User.deleteMany({})
+}
+
 module.exports = {
   connect: connect,
-  disconnect: disconnect
+  disconnect: disconnect,
+  cleanUsers: cleanUsers
 };
