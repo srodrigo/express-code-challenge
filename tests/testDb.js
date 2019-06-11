@@ -14,12 +14,12 @@ function connect() {
     });
 }
 
-async function disconnect() {
-  mongoose.disconnect();
+function disconnect() {
+  return mongoose.connection.close();
 }
 
-async function cleanUsers() {
-  User.deleteMany({})
+function cleanUsers() {
+  return User.deleteMany({})
 }
 
 module.exports = {
