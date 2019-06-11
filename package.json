@@ -4,7 +4,8 @@
   "description": "A coding challenge to assess your ability to navigate an express server implementation.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "mocha --recursive ./tests"
   },
   "author": "",
   "license": "ISC",
