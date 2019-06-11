@@ -4,30 +4,21 @@ const mongoose = require('mongoose');
 
 const app = require('../../server');
 const User = require('../../models/user');
+const testDb = require('../testDb');
 
 mongoose.Promise = global.Promise;
 
 describe('Users', () => {
   before(() => {
-    mongoose.set('useNewUrlParser', true);
-    mongoose.connect('mongodb://localhost:27017/testbooksdb');
-    mongoose.connection
-      .once('open', () => console.log('Connected!'))
-      .on('error', (error) => {
-        console.warn('Error : ',error);
-      });
+    testDb.connect();
   });
 
-  after(() => {
-    mongoose.disconnect();
+  after(async () => {
+    testDb.disconnect();
   });
 
-  beforeEach(done => {
-    User
-      .deleteMany({})
-      .then(() => {
-        done();
-      });
+  beforeEach(async () => {
+    await User.deleteMany({})
   });
 
   it('authenticates an existing user', async done => {

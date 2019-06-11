@@ -1,32 +1,20 @@
 const expect = require('chai').expect;
-const mongoose = require('mongoose');
 
 const authenticateUser = require('../../auth/authenticateUser');
 const User = require('../../models/user');
-
-mongoose.Promise = global.Promise;
+const testDb = require('../testDb');
 
 describe('Authenticate User', () => {
   before(() => {
-    mongoose.set('useNewUrlParser', true);
-    mongoose.connect('mongodb://localhost:27017/testbooksdb');
-    mongoose.connection
-      .once('open', () => console.log('Connected!'))
-      .on('error', (error) => {
-        console.warn('Error : ',error);
-      });
+    testDb.connect();
   });
 
-  after(() => {
-    mongoose.disconnect();
+  after(async () => {
+    testDb.disconnect();
   });
 
-  beforeEach(done => {
-    User
-      .deleteMany({})
-      .then(() => {
-        done();
-      });
+  beforeEach(async () => {
+    await User.deleteMany({})
   });
 
   it('authenticates user with correct password', async () => {
