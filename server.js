@@ -5,6 +5,6 @@ const index = require('./routes/index.js');
 const usersRoutes = require('./routes/users');
 
 app.get('/', index);
-app.get('/users/signin', usersRoutes.signin);
+app.post('/users/signin', usersRoutes.signin);
 
 module.exports = app;
