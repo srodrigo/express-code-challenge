@@ -16,7 +16,11 @@ const Institution = mongoose.model(
       type: String,
       required: [true, 'Email Domain is required.'],
       unique: true
-    }
+    },
+    books: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Book'
+    }]
   })
 );
 
