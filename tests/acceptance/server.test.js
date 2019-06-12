@@ -6,7 +6,7 @@ const Institution = require('../../models/institution');
 const Book = require('../../models/book');
 const testDb = require('../testDb');
 
-describe('Users routes', () => {
+describe('Features', () => {
   before(() => {
     testDb.connect();
   });
