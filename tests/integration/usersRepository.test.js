@@ -19,7 +19,7 @@ describe('Users repository', () => {
     await testDb.cleanInstitutions();
   });
 
-  it('authenticates user with correct password', async () => {
+  it('creates user with institution', async () => {
     const institution = await Institution
       .create({
         name: 'test institution',
