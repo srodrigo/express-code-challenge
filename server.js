@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-const index = require('./routes/index.js');
 const usersRoutes = require('./routes/users');
 const authenticateUser = require('./auth/authenticateUser');
 const institutionsRepository = require('./repositories/institutionsRepository');
@@ -31,8 +30,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
   done(null, user);
 });
-
-app.get('/', index);
 
 app.post('/users/signin',
   passport.authenticate('local'),
