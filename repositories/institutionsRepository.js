@@ -3,7 +3,11 @@ const Institution = require('../models/institution');
 function getIdByDomain(emailDomain) {
   return Institution
     .findOne({ emailDomain: emailDomain })
-    .then(institution => institution._id);
+    .then(institution =>
+      institution === null
+        ? null
+        : institution._id
+    );
 }
 
 module.exports = {

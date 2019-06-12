@@ -98,11 +98,6 @@ describe('Users routes', () => {
         role: role
       })
       .expect('Content-Type', /json/)
-      .expect(400, {
-        status: 'fail',
-        data: {
-          message: 'The email domain provided does not match any institution'
-        }
-      });
+      .expect(400);
   });
 });
