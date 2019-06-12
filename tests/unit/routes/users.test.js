@@ -94,4 +94,33 @@ describe('Users routes', () => {
     expect(res.statusCalledWith).to.equal(400);
     expect(res.jsonCalledWith).to.deep.equal(expectedRes);
   });
+
+  it('creates user with encrypted password', async () => {
+    const req = {
+      body: {
+        email: 'validuser@testinstitution.com',
+        password: 'mypass123',
+        name: 'test username',
+        role: 'student'
+      }
+    };
+    const res = {
+      json: function (data) {}
+    };
+    const institutionsRepository = {
+      getIdByDomain: () => Promise.resolve('test object id')
+    };
+    const usersRepository = {
+      createCalledWith: null,
+      create: function (user) {
+        this.createCalledWith = user;
+        return Promise.resolve(user);
+      }
+    };
+
+    await usersRoutes.create(institutionsRepository, usersRepository)(req, res);
+
+    expect(usersRepository.createCalledWith.password)
+      .to.equal('d2bf02e60ed38af96751c5a78a8ffbe32f4598f9');
+  });
 });

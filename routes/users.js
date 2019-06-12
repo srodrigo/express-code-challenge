@@ -1,3 +1,5 @@
+const sha1 = require('sha1');
+
 function signin(req, res) {
   res.json({
     status: 'success',
@@ -23,7 +25,7 @@ function create(institutionsRepository, usersRepository) {
           return usersRepository
             .create({
               email: req.body.email,
-              password: req.body.password,
+              password: sha1(req.body.password),
               name: req.body.name,
               role: req.body.role,
               institution: institution
