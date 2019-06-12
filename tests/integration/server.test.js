@@ -3,6 +3,7 @@ const expect = require('mocha').chai;
 
 const app = require('../../server');
 const User = require('../../models/user');
+const Institution = require('../../models/institution');
 const testDb = require('../testDb');
 
 describe('Users', () => {
@@ -16,6 +17,7 @@ describe('Users', () => {
 
   beforeEach(async () => {
     await testDb.cleanUsers();
+    await testDb.cleanInstitutions();
   });
 
   it('authenticates an existing user', async () => {
@@ -44,13 +46,20 @@ describe('Users', () => {
       });
   });
 
-  it('creates a new user', () => {
+  it('creates a new user', async () => {
+    await Institution
+      .create({
+        name: 'test institution',
+        url: 'http://mytestinstitution.com',
+        emailDomain: 'testinstitution.com'
+      });
+
     const email = 'newuser@testinstitution.com';
     const password = 'testpass123';
     const username = 'test username';
     const role = 'student';
 
-    request(app)
+    await request(app)
       .post('/users/create')
       .set('Accept', 'application/json')
       .send({
@@ -63,18 +72,6 @@ describe('Users', () => {
       .expect(200, {
         status: 'success',
         data: {}
-      })
-      .end((err, res) => {
-        if (err) throw err;
-        User.findOne(
-          { email: email },
-          function (err, user) {
-            expect(user.email).to.equal(email);
-            expect(user.password).to.equal(password);
-            expect(user.username).to.equal(username);
-            expect(user.role).to.equal(role);
-          }
-        );
       });
   });
 });
