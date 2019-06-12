@@ -9,7 +9,6 @@ function connect() {
   mongoose.set('useNewUrlParser', true);
   mongoose.connect('mongodb://localhost:27017/testbooksdb', { useCreateIndex: true });
   mongoose.connection
-    .once('open', () => console.log('Connected!'))
     .on('error', (error) => {
       console.warn('Error : ',error);
     });
