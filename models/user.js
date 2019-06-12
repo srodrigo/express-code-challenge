@@ -20,6 +20,10 @@ const User = mongoose.model(
     role: {
       type: String,
       required: [true, 'Role is required.']
+    },
+    institution: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Institution'
     }
   })
 );

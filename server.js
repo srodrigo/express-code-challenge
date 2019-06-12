@@ -6,6 +6,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const index = require('./routes/index.js');
 const usersRoutes = require('./routes/users');
 const authenticateUser = require('./auth/authenticateUser');
+const institutionsRepository = require('./repositories/institutionsRepository');
+const usersRepository = require('./repositories/usersRepository');
 
 const app = express();
 
@@ -37,6 +39,8 @@ app.post('/users/signin',
   usersRoutes.signin
 );
 
-app.post('/users/create', usersRoutes.create);
+app.post('/users/create',
+  usersRoutes.create(institutionsRepository, usersRepository)
+);
 
 module.exports = app;
