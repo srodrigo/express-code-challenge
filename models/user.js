@@ -16,9 +16,9 @@ const User = mongoose.model(
       type: String,
       required: [true, 'Name is required.']
     },
-    // TODO: check valid role
     role: {
       type: String,
+      enum: ['student', 'academic', 'administrator'],
       required: [true, 'Role is required.']
     },
     institution: {

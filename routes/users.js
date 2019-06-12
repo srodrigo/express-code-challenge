@@ -25,7 +25,7 @@ function create(institutionsRepository, usersRepository) {
               email: req.body.email,
               password: req.body.password,
               name: req.body.name,
-              role: req.body.email,
+              role: req.body.role,
               institution: institution
             })
             .then(user => {
