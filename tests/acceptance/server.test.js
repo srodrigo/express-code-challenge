@@ -6,7 +6,7 @@ const User = require('../../models/user');
 const Institution = require('../../models/institution');
 const testDb = require('../testDb');
 
-describe('Users', () => {
+describe('Users routes', () => {
   before(() => {
     testDb.connect();
   });
@@ -46,7 +46,7 @@ describe('Users', () => {
       });
   });
 
-  it('creates a new user', async () => {
+  it('creates a new user if the institution domain exists', async () => {
     await Institution
       .create({
         name: 'test institution',
@@ -72,6 +72,37 @@ describe('Users', () => {
       .expect(200, {
         status: 'success',
         data: {}
+      });
+  });
+
+  it('rejects a new user if the institution domain does not exist', async () => {
+    await Institution
+      .create({
+        name: 'test institution',
+        url: 'http://mytestinstitution.com',
+        emailDomain: 'differentdomain.com'
+      });
+
+    const email = 'newuser@testinstitution.com';
+    const password = 'testpass123';
+    const username = 'test username';
+    const role = 'student';
+
+    await request(app)
+      .post('/users/create')
+      .set('Accept', 'application/json')
+      .send({
+        email: email,
+        password: password,
+        name: username,
+        role: role
+      })
+      .expect('Content-Type', /json/)
+      .expect(400, {
+        status: 'fail',
+        data: {
+          message: 'The email domain provided does not match any institution'
+        }
       });
   });
 });
